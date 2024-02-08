@@ -16,9 +16,34 @@ const config = {
 
 app.use(bodyParser.urlencoded({ extended: true}));
 app.use(express.static("public"))
+
 app.get("/", (req, res)=>{
     res.render("index.ejs");
 })
+
+// Clans
+
+app.get("/clans", (req, res)=>{
+    res.render("clans.ejs");
+})
+
+app.post("/clans", async (req, res)=>{
+    try{
+        const clanTag = "%23" + req.body.tag;
+        console.log(API_URL + "clans/" + clanTag)
+        const result = await axios.get(API_URL + "clans/" + clanTag, config);
+        const content = JSON.stringify(result.data);
+        console.log(content);
+        res.render("clans.ejs", {
+            content: content
+        })
+    }catch(error){
+        console.log("Error");
+    }
+})
+
+//Leagues
+
 app.get("/leagues", async (req, res)=>{
     try {
     const result = await axios.get(API_URL + "leagues", config);
