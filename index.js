@@ -42,6 +42,27 @@ app.post("/clans", async (req, res)=>{
     }
 })
 
+// Players
+
+app.get("/players", (req, res)=>{
+    res.render("players.ejs");
+})
+
+app.post("/players", async (req, res)=>{
+    try{
+        const playerTag = "%23" + req.body.tag;
+        console.log(API_URL + "players/" + playerTag)
+        const result = await axios.get(API_URL + "players/" + playerTag, config);
+        const content = JSON.stringify(result.data);
+        console.log(content);
+        res.render("players.ejs", {
+            content: content
+        })
+    }catch(error){
+        console.log("Error");
+    }
+})
+
 //Leagues
 
 app.get("/leagues", async (req, res)=>{
