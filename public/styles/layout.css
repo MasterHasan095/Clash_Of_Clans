@@ -1,0 +1,17 @@
+.box{
+    width: 30vw;
+    height: auto;
+    border: 2px solid black;
+    border-radius: 35px;
+    box-shadow: 5px 10px #888888;
+    display: flex;
+    flex-wrap: wrap;
+}
+.box:hover{
+    box-shadow: 50px 10px #888888;
+}
+
+.cards{
+    display: flex;
+    flex-wrap: wrap;
+}

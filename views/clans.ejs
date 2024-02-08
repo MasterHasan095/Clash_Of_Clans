@@ -1,8 +1,49 @@
 <%- include("partials/header.ejs") %>;
 <body>
-    <form action="/clans" method="post">
-        <input type="text" name = "tag" placeholder ="Enter clan Tag">
-        <input type="submit" value = "fetch Details">
-    </form>
+  <form action="/clans" method="post">
+    <input type="text" name="tag" placeholder="Enter clan Tag" />
+    <input type="submit" value="fetch Details" />
+  </form>
+
+  <hr />
+
+  <main>
+    <h1><%= locals.content.name %></h1>
+
+    <section class="cards">
+      <div class="card1 box">
+        <% if (locals.content.badgeUrls && locals.content.badgeUrls.large) { %>
+        <a href="<%= locals.content.badgeUrls.large %>">
+          <img src="<%= locals.content.badgeUrls.large %>" alt="Badge Image" />
+        </a>
+       
+      
+        <p><%= locals.content.description %></p>
+        <p>Country :<%= locals.content.location.name %></p>
+        <p>Clan Level :<%= locals.content.clanLevel %></p>
+        <p>Clan Points :<%= locals.content.clanPoints %></p>
+        <p>Required Trophies :<%= locals.content.requiredTrophies %></p>
+        <p>
+          Required Town Hall Level :<%= locals.content.requiredTownHallLevel %>
+        </p>
+        <p>Members :<%= locals.content.members %> /50</p>
+        <% }%>
+      </div>
+      <div class="card2 box">
+        <% if (locals.content.badgeUrls && locals.content.badgeUrls.large) { %>
+        <a href="<%= locals.content.badgeUrls.large %>">
+          <img src="<%= locals.content.badgeUrls.large %>" alt="Badge Image" />
+        </a>
+       
+        <p>warFrequency :<%= locals.content.warFrequency %></p>
+        <p>warWins:<%= locals.content.warWins %></p>
+        <p>warTies :<%= locals.content.warTies %></p>
+        <p>warLosses :<%= locals.content.warLosses %></p>
+        <p>warLeague :<%= locals.content.warLeague.name %></p>
+        <% } %>
+
+      </div>
+    </section>
+  </main>
 </body>
 <%- include("partials/footer.ejs") %>
