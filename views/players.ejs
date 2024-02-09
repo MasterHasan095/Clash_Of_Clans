@@ -1,8 +1,43 @@
 <%- include("partials/header.ejs") %>;
 <body>
-    <form action="/players" method="post">
-        <input type="text" name = "tag" placeholder ="Enter player Tag">
-        <input type="submit" value = "fetch Details">
-    </form>
+  <form action="/players" method="post">
+    <input type="text" name="tag" placeholder="Enter player Tag" />
+    <input type="submit" value="fetch Details" />
+  </form>
+
+  <main>
+    <% if (locals.content) { %>
+    <h1><%= locals.content.name %></h1>
+    <% } %>
+
+    <section class="cards">
+      <div class="card1 box">
+        <% if (locals.content) { %>
+
+        <p>Player Name : <%= locals.content.name %></p>
+        <p>Town Hall Level :<%= locals.content.townHallLevel %></p>
+        <p>Trophies :<%= locals.content.trophies %></p>
+        <p>Best trophies :<%= locals.content.bestTrophies %></p>
+        <p>Exp Points :<%= locals.content.expLevel %></p>
+        <p>War stars :<%= locals.content.warStars %></p>
+        <p>Clan Name :<%= locals.content.clan.name %></p>
+        <p>Role :<%= locals.content.role %></p>
+        <% }%>
+      </div>
+      <div class="card2 box">
+        <% if (locals.content) { %>
+        <div class = "labels">
+            <img src="<%= locals.content.labels[0].iconUrls.medium %>">
+            <img src="<%= locals.content.labels[1].iconUrls.medium %>">
+            <img src="<%= locals.content.labels[2].iconUrls.medium %>">
+        </div>
+        <p>Builder Hall Level :<%= locals.content.builderHallLevel %></p>
+        <p>builder Base Trophies :<%= locals.content.builderBaseTrophies %></p>
+        <p>Best Builder Base Trophies :<%= locals.content.bestBuilderBaseTrophies %></p>
+        <p>Builder Base League :<%= locals.content.builderBaseLeague.name %></p>
+        <% } %>
+      </div>
+    </section>
+  </main>
 </body>
 <%- include("partials/footer.ejs") %>

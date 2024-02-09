@@ -35,8 +35,6 @@ app.post("/clans", async (req, res)=>{
         console.log(API_URL + "clans/" + clanTag)
         const result = await axios.get(API_URL + "clans/" + clanTag, config);
         const content = result.data
-        console.log(content['name']);
-        console.log(content.badgeUrls.large)
         res.render("clans.ejs", {
             content: content
         })
@@ -56,8 +54,7 @@ app.post("/players", async (req, res)=>{
         const playerTag = "%23" + req.body.tag;
         console.log(API_URL + "players/" + playerTag)
         const result = await axios.get(API_URL + "players/" + playerTag, config);
-        const content = JSON.stringify(result.data);
-        console.log(content);
+        const content = result.data    
         res.render("players.ejs", {
             content: content
         })
