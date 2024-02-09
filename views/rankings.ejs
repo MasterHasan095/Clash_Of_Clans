@@ -1,0 +1,13 @@
+<%- include("partials/header.ejs") %>;
+<body>
+  <form action="/rankings" method="post">
+    <select name="country">
+        <% locations.forEach(country => { %>
+          <option value="<%= country.id %>"><%= country.name %></option>
+        <% }); %>
+      </select>    
+      <input type="submit" value="fetch Details" />
+  </form>
+  
+</body>
+<%- include("partials/footer.ejs") %>

@@ -63,19 +63,40 @@ app.post("/players", async (req, res)=>{
     }
 })
 
-//Leagues
-
-app.get("/leagues", async (req, res)=>{
-    try {
-    const result = await axios.get(API_URL + "leagues", config);
-    console.log("Below")
-    console.log(JSON.stringify(result.data));
-    res.render("index.ejs", { content: JSON.stringify(result.data) });
-    }catch(error){
-        console.log("error")
-        console.log(error.status)
+//Rankings
+const result = await axios.get(API_URL + "locations?limit=15", config);
+const locations = result.data.items;
+const countries = []
+for (let i = 0; i < locations.length; i++) {
+    if (locations[i].isCountry == true){
+        countries.push(locations[i]);
     }
+  }
+
+app.get("/rankings", (req, res)=>{
+    res.render("rankings.ejs", {
+        locations: countries
+    })
 })
+
+app.post("/rankings", async (req, res)=>{
+    const locationId = req.body.country;
+    console.log(locationId);
+    var result = await axios.get(API_URL + "locations/" + locationId + "/rankings/clans?limit=15", config);
+    const clans = result.data.items;
+    console.log(clans)
+    var result = await axios.get(API_URL + "locations/" + locationId + "/rankings/players?limit=15", config);
+    const players = result.data.items;
+    console.log(players)
+
+    res.render("rankings.ejs", {
+        locations: countries,
+        clans: clans,
+        players: players,
+    })
+})
+
+
 app.listen(PORT, ()=>{
     console.log(`Server running on ${PORT}`);
 })
