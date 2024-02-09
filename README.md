@@ -12,5 +12,5 @@ The port is set at 3000, so run it at http://localhost:3000/
 
 Endpoints that work : 
 /clans ( Designing left )
-/players (Programming left)
-/rankings ( fully untouched, cant even access)
+/players  ( Designing left )
+/rankings  ( Designing left )
